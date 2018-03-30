@@ -9,21 +9,25 @@ GPIO.setmode(GPIO.BOARD)       # Numbers GPIOs by physical location
 GPIO.setup(dirPin, GPIO.OUT)   # Set dirPin to output
 GPIO.setup(stepPin, GPIO.OUT)  # Set stepPin to output
 
-#GPIO.output(dirPin, GPIO.HIGH) # Set LedPin high(+3.3V) to turn on led
-
-
-#Direction of turning, 21 is our direction pin
-#GPIO.output(21, GPIO.HIGH)
-#GPIO.setmode(GPIO.BOARD)
-GPIO.output(dirPin, GPIO.HIGH)  #controlls direction of motor
+GPIO.output(dirPin, GPIO.HIGH) # Set LedPin high(+3.3V) to turn on led
 
 
 #Amount to turn
 
 #degrees = 360
 
+
+#1 = counter clockwise
+#0 = clockwise
+
+GPIO.output(stepPin, GPIO.HIGH)  #controlls direction of motor
+ 
+
+
+dir = input("Which direction? ")
+GPIO.output(dirPin, dir)  #controlls direction of motor
 degrees = input("Enter number of degrees: ")
-delay = input("From 1-10, enter how fast you want to spin: ")
+delay = input("From 1-5, enter how fast you want to spin: ")
 
 if (delay == 1):
     delay = 0.6
@@ -39,24 +43,6 @@ elif (delay == 4):
     
 elif (delay == 5):
     delay = 0.001
-    
-# else if (delay == 6):
-#     dealy = 1/32
-    
-# else if (delay == 7):
-#     delay = 1/64
-    
-# else if (delay == 8):
-#     delay = 1/128
-    
-# else if (delay == 9):
-#     delay = 1/256
-    
-# else if (delay == 10):
-#     delay = 1/512
-    
-
-
 
 
 #This variable is dependent on your motor
@@ -75,3 +61,6 @@ for i in range(stepCount):
     sleep(delay)
     GPIO.output(stepPin, GPIO.HIGH)
 
+
+
+GPIO.output(stepPin, GPIO.LOW)
